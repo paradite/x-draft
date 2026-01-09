@@ -1,0 +1,42 @@
+{
+  "name": "x-draft",
+  "version": "1.0.0",
+  "description": "A drafting command line tool for X (Twitter) to create tweets that perform well",
+  "type": "module",
+  "main": "dist/cli/index.js",
+  "bin": {
+    "x-draft": "dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/cli/index.ts",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "format": "prettier --write src/**/*.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "twitter",
+    "x",
+    "tweets",
+    "draft",
+    "cli"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0",
+    "tsx": "^4.6.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "dotenv": "^16.3.0"
+  }
+}
