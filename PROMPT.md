@@ -5,11 +5,11 @@
 1. Read `prd.md`
 2. Read `progress.md`
    (check Codebase Patterns first)
-3. Pick highest priority task that is still not completed
+3. Pick the next task that is still not completed
 4. Implement that ONE task
 5. Run typecheck and tests
 6. Commit: `feat: [ID] - [Title]`
-7. Update prd.md to indicate it is completed
+7. Update `prd.md` to indicate it is completed
 8. Append learnings to `progress.md`
 
 ## Progress Format
@@ -33,7 +33,7 @@ of `progress.txt`:
 
 ## Stop Condition
 
-If ALL stories are completed, reply:
-<promise>COMPLETE</promise>
+If ALL tasks are completed, reply:
+<promise>ALL TASKS TESTED AND PASS ACCEPTANCE CRITERIA. ALL COMPLETED.</promise>
 
 Otherwise end normally.
