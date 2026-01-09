@@ -24,11 +24,7 @@ X-Draft helps users create high-performing tweets by analyzing successful conten
 
 Core infrastructure and CLI setup.
 
-| Task | Summary                                     |
-| ---- | ------------------------------------------- |
-| 001  | Project Bootstrap - CLI, TypeScript, ESLint |
-
-### 001: Project Bootstrap
+### 001: Project Bootstrap [Not Started]
 
 - Initialize TypeScript project with ESLint and Prettier
 - Set up CLI framework (Commander.js or similar)
@@ -60,14 +56,7 @@ Core infrastructure and CLI setup.
 
 Multi-model draft creation with varied prompts.
 
-| Task | Summary                                        |
-| ---- | ---------------------------------------------- |
-| 002  | Claude Integration - Opus 4.5 API setup        |
-| 003  | Gemini Integration - 2.5 Pro API setup         |
-| 004  | Prompt Templates - Multiple generation styles  |
-| 005  | Draft Generation CLI - Generate drafts command |
-
-### 002: Claude Integration
+### 002: Claude Integration [Not Started]
 
 - Set up Anthropic SDK for Claude Opus 4.5
 - Create wrapper function for tweet generation
@@ -86,7 +75,7 @@ Multi-model draft creation with varied prompts.
 - [ ] Function returns error message when API key is invalid
 - [ ] Function handles rate limit errors without crashing
 
-### 003: Gemini Integration
+### 003: Gemini Integration [Not Started]
 
 - Set up Google AI SDK for Gemini 2.5 Pro
 - Create wrapper function matching Claude interface
@@ -105,7 +94,7 @@ Multi-model draft creation with varied prompts.
 - [ ] Function returns error message when API key is invalid
 - [ ] Both Claude and Gemini wrappers have identical function signatures
 
-### 004: Prompt Templates
+### 004: Prompt Templates [Not Started]
 
 - Design base system prompt for tweet generation
 - Create 3-5 distinct prompt variations:
@@ -132,7 +121,7 @@ Multi-model draft creation with varied prompts.
 - [ ] `buildPrompt()` includes popular tweet examples when provided
 - [ ] Different styles produce different system prompts
 
-### 005: Draft Generation CLI
+### 005: Draft Generation CLI [Not Started]
 
 - Create `draft` command with topic/idea input
 - Generate drafts using all model + prompt combinations
@@ -157,22 +146,6 @@ Multi-model draft creation with varied prompts.
 - [ ] `draft "test topic" --styles direct` only uses direct style
 - [ ] Each draft output includes model name and style name
 - [ ] `draft` without topic shows error message
-
----
-
-## Future Enhancements (Backlog)
-
-| Task | Summary                                               |
-| ---- | ----------------------------------------------------- |
-| F01  | Draft Review System - LLM-as-evaluator scoring        |
-| F02  | Review CLI - Review and rank drafts                   |
-| F03  | Best Pick Selection - Automated top pick logic        |
-| F04  | Draft Export - Copy to clipboard/file                 |
-| F05  | Workflow Command - Combined generate+review           |
-| F06  | History and Iteration - Track draft versions          |
-| F07  | X API Integration - Fetch user's actual tweet metrics |
-| F08  | Thread Support - Multi-tweet thread generation        |
-| F09  | GUI Interface - Web-based draft management            |
 
 ---
 

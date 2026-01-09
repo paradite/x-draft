@@ -5,11 +5,11 @@
 1. Read `prd.md`
 2. Read `progress.md`
    (check Codebase Patterns first)
-3. Pick the next task that is still not completed
+3. Pick the next task that has status "Not Started"
 4. Implement that ONE task
 5. Run typecheck and tests
 6. Commit: `feat: [ID] - [Title]`
-7. Update `prd.md` to indicate it is completed
+7. Update `prd.md` to indicate the task status as "Completed"
 8. Append learnings to `progress.md`
 
 ## Progress Format

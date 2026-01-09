@@ -6,7 +6,7 @@ set -e
 
 MAX_ITERATIONS=${1:-10}
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PRD_FILE="$SCRIPT_DIR/prd.json"
+PRD_FILE="$SCRIPT_DIR/prd.md"
 PROGRESS_FILE="$SCRIPT_DIR/progress.md"
 
 # Initialize progress file if it doesn't exist
