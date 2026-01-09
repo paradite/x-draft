@@ -24,7 +24,7 @@ X-Draft helps users create high-performing tweets by analyzing successful conten
 
 Core infrastructure and CLI setup.
 
-### 001: Project Bootstrap [Not Started]
+### 001: Project Bootstrap [Completed]
 
 - Initialize TypeScript project with ESLint and Prettier
 - Set up CLI framework (Commander.js or similar)
