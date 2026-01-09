@@ -8,6 +8,8 @@
 - **Model Integration**: Model wrappers go in `src/lib/models/` with matching test files
 - **Error Handling**: Return error message strings instead of throwing for graceful degradation
 - **Retry Logic**: Use exponential backoff for transient API errors (429, 5xx)
+- **Google AI SDK**: Use `@google/generative-ai` package with `systemInstruction` for system prompts
+- **Test Timeouts**: API calls to AI models may need longer test timeouts (30s for Gemini)
 
 ---
 
@@ -61,5 +63,28 @@
   - Using `response.content.find()` is cleaner than indexing for extracting text
   - Returning error strings (not throwing) allows callers to handle errors without try/catch
   - Tests can conditionally skip if API key isn't available for CI environments
+
+---
+
+## 2026-01-10 - 003: Gemini Integration
+
+- What was implemented:
+  - Installed @google/generative-ai dependency
+  - Created `generateWithGemini(prompt, systemPrompt)` wrapper function with identical signature to Claude
+  - Added retry logic with exponential backoff (3 retries, 1s/2s/4s delays)
+  - Handles API errors gracefully (invalid key, rate limit, server errors)
+  - Test suite covering valid key, invalid key, error handling, and function signature consistency
+
+- Files changed:
+  - package.json (modified - added @google/generative-ai)
+  - package-lock.json (modified)
+  - src/lib/models/gemini.ts (new)
+  - src/lib/models/gemini.test.ts (new)
+
+- **Learnings:**
+  - Google AI SDK uses `GoogleGenerativeAIError` but error handling differs from Anthropic (message parsing vs status codes)
+  - System prompts in Gemini use `systemInstruction` in model config, not a separate parameter
+  - Gemini API calls can be slower than Claude, requiring longer test timeouts (30s vs 5s default)
+  - String-based error detection (message.includes()) needed for Google SDK vs typed status codes in Anthropic SDK
 
 ---
