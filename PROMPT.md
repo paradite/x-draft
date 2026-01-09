@@ -5,8 +5,8 @@
 1. Read `prd.md`
 2. Read `progress.md`
    (check Codebase Patterns first)
-3. Pick highest priority story that is still not completed
-4. Implement that ONE story
+3. Pick highest priority task that is still not completed
+4. Implement that ONE task
 5. Run typecheck and tests
 6. Commit: `feat: [ID] - [Title]`
 7. Update prd.md to indicate it is completed
@@ -16,7 +16,7 @@
 
 APPEND to `progress.md`:
 
-## [Date] - [Story ID]
+## [Date] - [Task ID]
 
 - What was implemented
 - Files changed
