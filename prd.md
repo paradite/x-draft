@@ -56,7 +56,7 @@ Core infrastructure and CLI setup.
 
 Multi-model draft creation with varied prompts.
 
-### 002: Claude Integration [Not Started]
+### 002: Claude Integration [Completed]
 
 - Set up Anthropic SDK for Claude Opus 4.5
 - Create wrapper function for tweet generation
