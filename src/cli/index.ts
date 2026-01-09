@@ -3,6 +3,7 @@
 import { Command } from 'commander';
 import { config } from 'dotenv';
 import { resolve } from 'path';
+import { createDraftCommand } from './commands/draft';
 
 // Load environment variables from .env.local
 config({ path: resolve(process.cwd(), '.env.local') });
@@ -13,5 +14,8 @@ program
   .name('x-draft')
   .description('A drafting CLI tool for X (Twitter) to create tweets that perform well')
   .version('1.0.0');
+
+// Register commands
+program.addCommand(createDraftCommand());
 
 program.parse();
