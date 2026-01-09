@@ -37,6 +37,23 @@ Core infrastructure and CLI setup.
 - Use dotenv to load API keys from `.env.local`
 - Add utility functions to read markdown files from `data/user-tweets/` and `data/popular-tweets/`
 
+**Acceptance Criteria:**
+
+- `npm run build` compiles without errors
+- `npm run lint` passes with no errors
+- CLI entry point runs: `npx tsx src/cli/index.ts --help` shows help
+- Environment variables load from `.env.local`
+- `readTweets('data/user-tweets/')` returns array of tweet strings
+- `readTweets('data/popular-tweets/')` returns array of tweet strings
+
+**Tests:**
+
+- [ ] `npm run build` exits with code 0
+- [ ] `npm run lint` exits with code 0
+- [ ] CLI `--help` displays usage information
+- [ ] Reading tweets from folder with 2+ markdown files returns correct count
+- [ ] Reading tweets from empty folder returns empty array
+
 ---
 
 ## Phase 2: Draft Generation (002-005)
@@ -57,12 +74,36 @@ Multi-model draft creation with varied prompts.
 - Handle API errors and rate limiting
 - Add retry logic with exponential backoff
 
+**Acceptance Criteria:**
+
+- `generateWithClaude(prompt, systemPrompt)` returns generated text
+- Function handles API errors gracefully (returns error message, doesn't crash)
+- Retry logic attempts up to 3 times on transient failures
+
+**Tests:**
+
+- [ ] `generateWithClaude()` returns non-empty string with valid API key
+- [ ] Function returns error message when API key is invalid
+- [ ] Function handles rate limit errors without crashing
+
 ### 003: Gemini Integration
 
 - Set up Google AI SDK for Gemini 2.5 Pro
 - Create wrapper function matching Claude interface
 - Handle API errors and rate limiting
 - Ensure consistent output format between models
+
+**Acceptance Criteria:**
+
+- `generateWithGemini(prompt, systemPrompt)` returns generated text
+- Function signature matches Claude wrapper for consistency
+- Function handles API errors gracefully
+
+**Tests:**
+
+- [ ] `generateWithGemini()` returns non-empty string with valid API key
+- [ ] Function returns error message when API key is invalid
+- [ ] Both Claude and Gemini wrappers have identical function signatures
 
 ### 004: Prompt Templates
 
@@ -76,6 +117,21 @@ Multi-model draft creation with varied prompts.
 - Include user tweet examples in prompts for style mimicking
 - Include popular tweets for pattern learning
 
+**Acceptance Criteria:**
+
+- `getPromptStyles()` returns array of available style names
+- `buildPrompt(style, topic, userTweets, popularTweets)` returns formatted prompt
+- Each style produces distinctly different prompts
+- User tweets and popular tweets are incorporated into prompts
+
+**Tests:**
+
+- [ ] `getPromptStyles()` returns at least 3 styles
+- [ ] `buildPrompt()` includes the topic in the output
+- [ ] `buildPrompt()` includes user tweet examples when provided
+- [ ] `buildPrompt()` includes popular tweet examples when provided
+- [ ] Different styles produce different system prompts
+
 ### 005: Draft Generation CLI
 
 - Create `draft` command with topic/idea input
@@ -83,6 +139,24 @@ Multi-model draft creation with varied prompts.
 - Output all generated drafts to console
 - Support `--models` flag to select specific models
 - Support `--styles` flag to select specific prompt styles
+
+**Acceptance Criteria:**
+
+- `npx tsx src/cli/index.ts draft "topic"` generates and displays drafts
+- By default, generates drafts for all model + style combinations (2 models × 5 styles = 10 drafts)
+- `--models claude` generates only Claude drafts
+- `--models gemini` generates only Gemini drafts
+- `--styles direct,engaging` generates only specified styles
+- Output clearly labels each draft with model and style used
+
+**Tests:**
+
+- [ ] `draft "test topic"` outputs at least one draft
+- [ ] `draft "test topic" --models claude` only uses Claude model
+- [ ] `draft "test topic" --models gemini` only uses Gemini model
+- [ ] `draft "test topic" --styles direct` only uses direct style
+- [ ] Each draft output includes model name and style name
+- [ ] `draft` without topic shows error message
 
 ---
 
