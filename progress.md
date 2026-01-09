@@ -10,6 +10,7 @@
 - **Retry Logic**: Use exponential backoff for transient API errors (429, 5xx)
 - **Google AI SDK**: Use `@google/generative-ai` package with `systemInstruction` for system prompts
 - **Test Timeouts**: API calls to AI models may need longer test timeouts (30s for Gemini)
+- **Prompt Templates**: Prompt utilities go in `src/lib/prompts/` with style-specific instructions as constants
 
 ---
 
@@ -86,5 +87,28 @@
   - System prompts in Gemini use `systemInstruction` in model config, not a separate parameter
   - Gemini API calls can be slower than Claude, requiring longer test timeouts (30s vs 5s default)
   - String-based error detection (message.includes()) needed for Google SDK vs typed status codes in Anthropic SDK
+
+---
+
+## 2026-01-10 - 004: Prompt Templates
+
+- What was implemented:
+  - Created `getPromptStyles()` function returning 5 prompt styles
+  - Created `buildPrompt(style, topic, userTweets, popularTweets)` function
+  - Base system prompt with tweet writing guidelines
+  - 5 distinct style instructions: direct, engaging, conversational, controversial, story
+  - User tweet examples integration for style mimicking
+  - Popular tweet examples integration for pattern learning
+  - Comprehensive test suite with 11 tests
+
+- Files changed:
+  - src/lib/prompts/templates.ts (new)
+  - src/lib/prompts/templates.test.ts (new)
+
+- **Learnings:**
+  - Using Record<PromptStyle, string> provides type-safe style instruction mapping
+  - Returning object with `{ userPrompt, systemPrompt }` keeps the API clear and flexible
+  - Optional parameters with empty array defaults make the function versatile
+  - Each style instruction should focus on 4-5 key behavioral differences
 
 ---
