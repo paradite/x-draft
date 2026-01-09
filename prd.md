@@ -121,7 +121,7 @@ Multi-model draft creation with varied prompts.
 - [ ] `buildPrompt()` includes popular tweet examples when provided
 - [ ] Different styles produce different system prompts
 
-### 005: Draft Generation CLI [Not Started]
+### 005: Draft Generation CLI [Completed]
 
 - Create `draft` command with topic/idea input
 - Generate drafts using all model + prompt combinations

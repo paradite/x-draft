@@ -11,6 +11,7 @@
 - **Google AI SDK**: Use `@google/generative-ai` package with `systemInstruction` for system prompts
 - **Test Timeouts**: API calls to AI models may need longer test timeouts (30s for Gemini)
 - **Prompt Templates**: Prompt utilities go in `src/lib/prompts/` with style-specific instructions as constants
+- **CLI Commands**: Command modules go in `src/cli/commands/` and are registered in `src/cli/index.ts` via `addCommand()`
 
 ---
 
@@ -110,5 +111,29 @@
   - Returning object with `{ userPrompt, systemPrompt }` keeps the API clear and flexible
   - Optional parameters with empty array defaults make the function versatile
   - Each style instruction should focus on 4-5 key behavioral differences
+
+---
+
+## 2026-01-10 - 005: Draft Generation CLI
+
+- What was implemented:
+  - Created `draft` command with topic argument and model/style filtering options
+  - Implemented `--models` flag to filter by model (claude, gemini, or comma-separated list)
+  - Implemented `--styles` flag to filter by style (direct, engaging, conversational, controversial, story)
+  - Sequential generation through all model + style combinations
+  - Output formatting with clear labels for model and style per draft
+  - Loads user tweets from `data/user-tweets/` and popular tweets from `data/popular-tweets/`
+  - Comprehensive test suite with 14 tests for parsing functions
+
+- Files changed:
+  - src/cli/commands/draft.ts (new)
+  - src/cli/commands/draft.test.ts (new)
+  - src/cli/index.ts (modified - added draft command registration)
+
+- **Learnings:**
+  - Commander.js supports shorthand model names with parsing functions that normalize to full names
+  - Separating parse functions (`parseModels`, `parseStyles`) makes them testable without mocking CLI
+  - Sequential model calls prevent rate limiting issues vs parallel execution
+  - Using Record<ModelName, Generator> provides type-safe model-to-function mapping
 
 ---
