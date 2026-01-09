@@ -1,0 +1,3 @@
+I think my CC "supervisor agent" is stuck.
+Because my main Claude video agent is stuck.
+Because of Gemini 2.5 Flash rate limit...
