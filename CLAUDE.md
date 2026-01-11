@@ -27,7 +27,35 @@ npm run format         # Format with Prettier
 
 # CLI usage (development)
 npx tsx src/cli/index.ts draft "topic" [--models claude,gemini] [--styles direct,engaging,...]
+
+# Fetch tweets by URL or ID
+npx tsx src/cli/index.ts fetch "https://x.com/user/status/123456789"
+npx tsx src/cli/index.ts fetch 123456789
+npx tsx src/cli/index.ts fetch --id 123456789 --json
 ```
+
+## Tweet Fetching
+
+The `fetch` command downloads tweet data by URL or ID. No authentication required.
+
+### What Works
+
+- **Fetch by URL**: `fetch "https://x.com/user/status/123456789"`
+- **Fetch by ID**: `fetch 123456789` or `fetch --id 123456789`
+- **JSON output**: Add `--json` flag for raw data
+
+### Limitations (Twitter API Restrictions)
+
+- **Search by keyword**: NOT supported - Twitter requires login for search
+- **User timeline**: NOT supported - requires authentication
+- **Bulk fetching**: NOT supported - one tweet at a time only
+
+### Technical Implementation
+
+Two methods are used, with automatic fallback:
+
+1. **Syndication API** (primary): `cdn.syndication.twimg.com/tweet-result` - Twitter's embed API, no auth needed
+2. **Twitter Scraper** (fallback): `@the-convocation/twitter-scraper` - provides more detailed stats (retweets, replies)
 
 ## Architecture
 
@@ -36,10 +64,15 @@ src/
 ├── cli/
 │   ├── index.ts              # CLI entry point, loads .env.local
 │   └── commands/
-│       └── draft.ts          # Draft generation command
+│       ├── draft.ts          # Draft generation command
+│       └── fetch.ts          # Tweet fetching command
 ├── lib/
 │   ├── config.ts             # API key loading
 │   ├── tweets.ts             # Tweet file reading utility
+│   ├── tweets/
+│   │   ├── index.ts          # Tweet download exports
+│   │   ├── download.ts       # Syndication API for fetching tweets
+│   │   └── scraper.ts        # Twitter-scraper wrapper (fallback)
 │   ├── models/
 │   │   ├── claude.ts         # Claude wrapper with retry logic
 │   │   └── gemini.ts         # Gemini wrapper with retry logic
