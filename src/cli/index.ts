@@ -4,6 +4,7 @@ import { Command } from 'commander';
 import { config } from 'dotenv';
 import { resolve } from 'path';
 import { createDraftCommand } from './commands/draft';
+import { createFetchCommand } from './commands/fetch';
 
 // Load environment variables from .env.local
 config({ path: resolve(process.cwd(), '.env.local') });
@@ -17,5 +18,6 @@ program
 
 // Register commands
 program.addCommand(createDraftCommand());
+program.addCommand(createFetchCommand());
 
 program.parse();
